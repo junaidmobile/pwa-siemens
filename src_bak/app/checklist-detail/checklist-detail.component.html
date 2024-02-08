@@ -1,0 +1,252 @@
+<div id="content-wrapper" [@routerTransition] class="d-flex flex-column">
+
+  <div id="content">
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+      <button routerLink='/checklist' class="btn btn-link">
+        <i class="fa fa-chevron-left"></i>
+      </button>
+      <h6> {{title}} </h6>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown no-arrow">
+          <button id="sidebarToggleTop" class="btn btn-link">
+            <i class="fa fa-sign-out"></i>
+          </button>
+        </li>
+
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class=" card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+              <table class="table">
+                <tr class="receivedClass">
+                  <th>
+                    Checklist Received
+                  </th>
+                  <th>
+                    Job No.
+                  </th>
+                </tr>
+                <tr class="receivedClass">
+                  <td>
+                    {{CheckListDetailByHAWBNo?.JobRefNo}}
+                  </td>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.JobRefNo}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <th>
+                    Origin - Destination
+                  </th>
+                  <th>
+                    HAWB No.
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="fa fa-plane"></i>
+                    {{CheckListDetailByHAWBNo?.Origin}}-{{CheckListDetailByHAWBNo?.Destination}}
+                  </td>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.HAWBNo}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <th>
+                    Flight No.
+                  </th>
+                  <th>
+                    Schemes
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    22-05-20
+                  </td>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.Scheme}}
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    Flight ETA
+                  </th>
+                  <th>
+                    Port of Clearance
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.FlightETA}}
+                  </td>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.PortofClearance}}
+
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    No. of Packages
+                  </th>
+                  <th>
+                    Gross Weight
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.NOP}}
+                  </td>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.GrossWeight}} Kgs
+                  </td>
+                </tr>
+
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 cardMargin">
+          <div class=" card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+              <table class="table">
+                <tr style="white-space: nowrap;">
+                  <th>
+                    No. of Invoices
+                  </th>
+                  <th>
+                    Invoice Amount
+                  </th>
+                  <th>
+                    Product Count
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.InvoiceCount}}
+                  </td>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.InvoiceAmount}}
+                  </td>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.ProductCount}}
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    Schemes
+                  </th>
+
+                </tr>
+                <tr>
+                  <th>
+                    EPCG
+                  </th>
+                  <th>
+                    DFIA
+                  </th>
+                  <th>
+                    DEEC/ Re-Imports
+                  </th>
+
+                </tr>
+                <tr>
+                  <td>
+                    1
+                  </td>
+                  <td>
+                    2
+                  </td>
+                  <td>
+                    1/ 3
+                  </td>
+
+                </tr>
+
+
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 cardMargin">
+          <a href="#" class="pull-right commonColor">Download &nbsp;&nbsp;&nbsp;<i
+              style="float: right;font-size: x-large;color: #ec6702;margin-right: 15px;;" class="fa fa-download"></i>
+          </a>
+        </div>
+
+        <div class="col-12  cardMargin">
+          <div class=" card  shadow h-100 py-2">
+            <div class="card-body borderOrangeAll">
+              <h6 class="commonColor">Track and Trace</h6>
+              <span>Status: Flight arrived</span>
+              <a href="#" class="pull-right commonColor"><i
+                  style="float: right;font-size: x-large;color: #ec6702;margin-right: 15px;;"
+                  class="fa fa-chevron-right"></i> </a>
+              <br>
+              <span>Date & Time: 22-05-20, 21:40</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12  cardMargin">
+          <div class=" card  shadow h-100 py-2">
+            <div class="card-body">
+              <table class="table table-bordered text-nowrap">
+                <tr class="chkllog">
+                  <th>
+                    Date
+                  </th>
+                  <th>
+                    Status
+                  </th>
+                  <th>
+                    Remarks
+                  </th>
+                </tr>
+                <tr>
+                  <td>23-05-20, 16:45</td>
+                  <td><i class="fa fa-warning commonColor"></i></td>
+                  <td>Incorrect document</td>
+                </tr>
+                <tr>
+                  <td>23-05-20, 16:45</td>
+                  <td><i class="fa fa-warning commonColor"></i></td>
+                  <td>Incorrect document</td>
+                </tr>
+
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 cardMargin">
+          <div class=" card  shadow h-100 py-2">
+            <div class="card-body">
+              <label>Remark</label>
+              <div class="input-group">
+
+                <textarea [(ngModel)]="Remark" class="form-control" aria-label="With textarea"></textarea>
+              </div>
+              <br>
+              <a  (click)="saveCheckListStatusApprove();" class="btn btndecl btn-sm  " style="margin-right: 10px;;">Decline</a>
+
+              <a  (click)="saveCheckListStatusApprove();" class="btn btnClass btn-sm ">Approve </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</div>

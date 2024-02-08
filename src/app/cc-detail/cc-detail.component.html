@@ -1,0 +1,242 @@
+<div id="content-wrapper" [@routerTransition] class="d-flex flex-column">
+
+  <div id="content">
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+      <button routerLink='/customsbrokerlist' class="btn btn-link ">
+        <i class="fa fa-chevron-left"></i>
+      </button>
+      <img src="assets/img/logo-header.png" class="brand_logo" alt="Logo" style="height: 40px;width: 100px;">&nbsp;&nbsp;
+      <h6>CC Details</h6>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown no-arrow">
+          <button (click)="exit()" id="sidebarToggleTop" class="btn btn-link ">
+            <i class="fa fa-sign-out"></i>
+          </button>
+        </li>
+
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class=" card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+              <table class="table">
+                <!-- <tr class="receivedClass">
+                  <th>
+                    Status
+                  </th>
+                  <th>
+                    Flight Lands In
+                  </th>
+                </tr>
+                <tr class="receivedClass">
+                  <td>
+                    Flight Departed
+                  </td>
+                  <td>
+                    6:30 Hrs
+                  </td>
+                </tr> -->
+
+                <tr>
+                  <th>
+                    HAWB No.
+                  </th>
+                  <th>
+                    Origin - Des
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="fa fa-plane"></i>
+                    {{CheckListDetailByHAWBNo?.HAWBNo}}
+
+                  </td>
+                  <td>
+
+                    {{CheckListDetailByHAWBNo?.Origin}}-{{CheckListDetailByHAWBNo?.Destination}}
+                  </td>
+                </tr>
+
+                <tr>
+
+                  <th>
+                    Flight ETA
+                  </th>
+                  <th>
+                    NOP & Gr. Wt.
+                  </th>
+
+                </tr>
+                <tr>
+
+                  <td>
+                    {{CheckListDetailByHAWBNo?. FlightETA}}
+                  </td>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.NOP}}, {{CheckListDetailByHAWBNo?.GrossWeight}} Kgs
+                  </td>
+                </tr>
+                <tr>
+
+                  <th>
+                    BU
+                  </th>
+                  <th>
+                    Recd. No. of Invoices
+                  </th>
+                </tr>
+                <tr>
+
+                  <td>
+                    {{CheckListDetailByHAWBNo?.BusinessUnit}}
+                  </td>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.UCRCount}}
+                  </td>
+                </tr>
+                <tr>
+
+                  <th>
+                    Total No. of Invoices
+                  </th>
+                  <th>
+                    Customs Broker
+                  </th>
+                </tr>
+                <tr>
+
+                  <td>
+                    {{CheckListDetailByHAWBNo?.InvoiceCount}}
+                  </td>
+                  <td>
+                    {{CheckListDetailByHAWBNo?.CustomBrokerName}}
+                  </td>
+                </tr>
+
+                <tr>
+
+                  <th>
+                    Buyer Details
+                  </th>
+
+                </tr>
+                <tr>
+
+                  <td>
+                    {{CheckListDetailByHAWBNo?.BuyerName}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="col-6 cardMargin">
+          <a class="btn btnClass btn-sm ">Assign CC</a>
+        </div>
+        <div class="col-6 cardMargin">
+          <a href="#" class="pull-right commonColor">Download &nbsp;&nbsp;&nbsp;<i
+              style="float: right;font-size: x-large;color: #ec6702;margin-right: 15px;;" class="fa fa-download"></i>
+          </a>
+        </div> -->
+
+
+
+        <!-- <div class="col-12  cardMargin">
+          <div class=" card  shadow h-100 py-2">
+            <div class="card-body">
+              <table class="table table-bordered text-nowrap">
+                <tr class="chkllog">
+                  <th>
+                    Customs Broker
+                  </th>
+                  <th>
+                    Branch
+                  </th>
+                  <th>
+
+                  </th>
+                </tr>
+                <tr>
+                  <td>Khimji Poonja</td>
+                  <td>Mumbai Air</td>
+                  <td><i class="fa fa-trash-o commonColor"></i></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="col-12  cardMargin">
+          <label>Cost Center</label>
+          <div class="input-group">
+            <!-- <input type="text" class="form-control"> -->
+            <select   name="" id="idCC" class="js-example-basic-single form-control"  [(ngModel)]="ddlCClist">
+              <option [value]="0">Select Cost Center</option>
+              <option *ngFor="let option of objCCList; let idx = index" [value]="option.value">
+                {{option.description}}</option>
+            </select>
+
+
+
+            <!-- <search-dropdown  [(ngModel)]="ddlCClist">
+
+              <option value="0">{{ccOption}}</option>
+              <option *ngFor="let option of objCCList; let idx = index" [value]="option.value">
+                {{option.description}}</option>
+            </search-dropdown> -->
+          </div>
+        </div>
+        <!--  <div class="col-4  cardMargin">
+          <label>Division</label>
+          <div class="input-group">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+
+        <div class="col-4  cardMargin">
+          <label>Business Unit</label>
+          <div class="input-group">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-4  cardMargin">
+          <label>WBS</label>
+          <div class="input-group">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-4  cardMargin">
+          <label>Sales Order</label>
+          <div class="input-group">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-12  cardMargin">
+          <div class=" card  shadow h-100 py-2">
+            <div class="card-body">
+              <label>Remarks</label>
+              <div class="input-group">
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="col-12 cardMargin">
+          <div class=" card  shadow h-100 py-2">
+            <div class="card-body">
+              <button class="btn btn btn-sm btndecl" style="margin-right: 10px;" (click)="cancel()">
+                Cancel
+              </button>
+              <a (click)="submitCCDetail()" class="btn btnClass btn-sm ">Assign Cost Center</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

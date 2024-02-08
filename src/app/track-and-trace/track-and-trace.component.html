@@ -1,0 +1,331 @@
+<style>
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  .table td,
+  .table th {
+
+    width: 50%;
+  }
+</style>
+
+<div id="content-wrapper" [@routerTransition] class="d-flex flex-column">
+
+  <div id="content">
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+      <button routerLink='/dashboard' class="btn btn-link">
+        <i class="fa fa-chevron-left"></i>
+      </button>
+      <img src="assets/img/logo-header.png" class="brand_logo" alt="Logo" style="height: 40px;width: 100px;">&nbsp;&nbsp;
+      <h6> {{title}} </h6>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown no-arrow">
+          <button (click)="exit()" id="sidebarToggleTop" class="btn btn-link">
+            <i class="fa fa-sign-out"></i>
+          </button>
+        </li>
+
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-6">
+          <div class="form-group">
+            <select [(ngModel)]="objTracknTrace.Type" class="form-control" id="hawb" value="HOUSENO">
+
+              <option value="0">-Select Option-</option>
+              <option value="HOUSENO">HAWB/HBL No.</option>
+              <option value="UCRNO">UCR No.</option>
+              <option value="MAWBNO">MAWB/MBL No.</option>
+              <option value="PONO">PO No.</option>
+              <option value="InvoiceNO">Invoice No.</option>
+              <option value="JobRefNo">Job Ref No.</option>
+              <option value="BENo">BOE</option>
+
+            </select>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="input-group">
+            <input type="text" igxInput [attr.maxlength]="50" [(ngModel)]="objTracknTrace.HOUSENO" type="text"
+              autocomplete="off" placeholder="" class="form-control">
+          </div>
+        </div>
+
+        <div class="col-12 cardMargin " style=" display: flex;
+        align-items: center;
+        justify-content: center;">
+
+          <button type="button" [disabled]="objTracknTrace.HOUSENO == '' || objTracknTrace.Type == '0'" name="button" igxButton
+            (click)="getTrackAndTrace()" class="btn btnClass btn-sm">Search</button>
+        </div>
+        <div *ngIf=showDiv class="col-12">
+          <div class=" col-12 cardMargin" *ngIf="HAWBdiv">
+            <div class=" card border-left-primary shadow h-100 py-2">
+              <div class="card-body">
+                <table class="table  text-nowrap">
+                  <tr>
+                    <th>
+                      Type
+                    </th>
+                    <th>
+                      Number
+                    </th>
+
+                  </tr>
+                  <tr>
+                    <td *ngIf="TypeShow == 'HOUSENO'">HAWB No.</td>
+                    <td *ngIf="TypeShow == 'UCRNO'">UCR No.</td>
+                    <td *ngIf="TypeShow == 'MAWBNO'">MAWB No.</td>
+                    <td *ngIf="TypeShow == 'PONO'">PO No.</td>
+                    <td *ngIf="TypeShow == 'InvoiceNO'">Invoice No.</td>
+                    <td *ngIf="TypeShow == 'JobRefNo'">Job Ref No.</td>
+                    <td *ngIf="TypeShow == 'BENo'">BOE</td>
+
+                    <td>{{HAWBNo}}</td>
+                  </tr>
+
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12  cardMargin" *ngIf="MileStoneDivdiv">
+            <div class=" card border-left-primary shadow h-100 py-2">
+              <div class="card-body">
+                <div class="panel-group" id="accordion">
+                  <div class="panel panel-default">
+                    <div class="panel-heading accordion-toggle collapsed" data-toggle="collapse"
+                      data-parent="#accordion" data-target="#collapseOne">
+
+                      <h6 class="panel-title"> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Supplier</h6>
+
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                      <div class="panel-body" *ngFor="let item of (objTracknTrace.supplierMileStones.mileStones?
+                     objTracknTrace.supplierMileStones.mileStones : []); index as i ">
+                        <!-- <div class="col-sm-6">{{item.MileStoneName}}</div>
+                      <div class="col-sm-6">{{item.MileStoneValue}}</div> -->
+                        <table class="table" id="supTbl">
+                          <tr>
+                            <td>
+                              <span style="margin-left:28px;">{{item.MileStoneName}}</span>
+                            </td>
+                            <td>
+                              {{item.MileStoneValue}}
+                            </td>
+                          </tr>
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading accordion-toggle collapsed" data-toggle="collapse"
+                      data-parent="#accordion" data-target="#collapseTwo">
+                      <h6 class="panel-title"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Origin Airport
+                      </h6>
+
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                      <div class="panel-body" *ngFor="let item of (objTracknTrace.originAirportMileStones.mileStones?
+                    objTracknTrace.originAirportMileStones.mileStones: []); index as i ">
+                        <table class="table">
+                          <tr class="">
+                            <td>
+                              <span style="margin-left:28px;">{{item.MileStoneName}}</span>
+                            </td>
+                            <td>
+                              {{item.MileStoneValue}}
+                            </td>
+                          </tr>
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="panel panel-default">
+                    <div class="panel-heading accordion-toggle collapsed" data-toggle="collapse"
+                      data-parent="#accordion" data-target="#collapse3">
+                      <h6 class="panel-title"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Transit</h6>
+
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                      <div class="panel-body" *ngFor="let item of (objTracknTrace.transitMileStones.mileStones?
+                    objTracknTrace.transitMileStones.mileStones: []); index as i ">
+                        <table class="table">
+                          <tr class="">
+                            <td>
+                              <span style="margin-left:28px;">{{item.MileStoneName}}</span>
+                            </td>
+                            <td>
+                              {{item.MileStoneValue}}
+                            </td>
+                          </tr>
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="panel">
+                    <div class="panel-heading accordion-toggle collapsed" data-toggle="collapse"
+                      data-parent="#accordion" data-target="#collapse4">
+                      <h6 class="panel-title"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Destination
+                        Airport
+                      </h6>
+
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse">
+                      <div class="panel-body" *ngFor="let item of (objTracknTrace.destinationAirportMileStones.mileStones?
+                    objTracknTrace.destinationAirportMileStones.mileStones: []); index as i ">
+                        <table class="table">
+                          <tr class="">
+                            <td>
+                              <span style="margin-left:28px;">{{item.MileStoneName}}</span>
+                            </td>
+                            <td>
+                              {{item.MileStoneValue}}
+                            </td>
+                          </tr>
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="panel panel-default">
+                    <div class="panel-heading accordion-toggle collapsed" data-toggle="collapse"
+                      data-parent="#accordion" data-target="#collapse6">
+                      <h6 class="panel-title"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Customs</h6>
+
+                    </div>
+                    <div id="collapse6" class="panel-collapse collapse">
+                      <div class="panel-body" *ngFor="let item of (objTracknTrace.customMileStones.mileStones?
+                    objTracknTrace.customMileStones.mileStones: []); index as i ">
+                        <table class="table">
+                          <tr class="">
+                            <td>
+                              <span style="margin-left:28px;">{{item.MileStoneName}}</span>
+                            </td>
+                            <td>
+                              {{item.MileStoneValue}}
+                            </td>
+                          </tr>
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="panel panel-default">
+                    <div class="panel-heading accordion-toggle collapsed" data-toggle="collapse"
+                      data-parent="#accordion" data-target="#collapse5">
+                      <h6 class="panel-title"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Airport Terminal
+                      </h6>
+
+                    </div>
+                    <div id="collapse5" class="panel-collapse collapse">
+                      <div class="panel-body" *ngFor="let item of (objTracknTrace.airportTerminalMileStones.mileStones?
+                    objTracknTrace.airportTerminalMileStones.mileStones: []); index as i ">
+                        <table class="table">
+                          <tr class="">
+                            <td>
+                              <span style="margin-left:28px;">{{item.MileStoneName}}</span>
+                            </td>
+                            <td>
+                              {{item.MileStoneValue}}
+                            </td>
+                          </tr>
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="panel panel-default">
+                    <div class="panel-heading accordion-toggle collapsed" data-toggle="collapse"
+                      data-parent="#accordion" data-target="#collapse7">
+
+                      <h6 class="panel-title" *ngIf="objTracknTrace['perWareHouse'] > 100">
+                        <i class="fa fa-circle-thin" aria-hidden="true"></i>
+                        Warehouse</h6>
+
+
+
+                      <h6 class="panel-title" *ngIf="objTracknTrace['perWareHouse'] < 100">
+                        <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                        Warehouse</h6>
+
+                    </div>
+                    <div id="collapse7" class="panel-collapse collapse">
+                      <div class="panel-body" *ngFor="let item of (objTracknTrace.warehouseMileStones.mileStones?
+                    objTracknTrace.warehouseMileStones.mileStones: []); index as i ">
+                        <table class="table">
+                          <tr class="">
+                            <td>
+                              <span style="margin-left:28px;">{{item.MileStoneName}}</span>
+                            </td>
+                            <td>
+                              {{item.MileStoneValue}}
+                            </td>
+                          </tr>
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="panel panel-default">
+                    <div class="panel-heading accordion-toggle collapsed" data-toggle="collapse"
+                      data-parent="#accordion" data-target="#collapse8">
+                      <h6 class="panel-title" *ngIf="objTracknTrace['perConsignee'] > 100">
+                        <i class="fa fa-circle-thin" aria-hidden="true"></i>
+                        Consignee</h6>
+
+                      <h6 class="panel-title" *ngIf="objTracknTrace['perConsignee'] < 100">
+                        <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                        Consignee</h6>
+
+
+                    </div>
+                    <div id="collapse8" class="panel-collapse collapse">
+                      <div class="panel-body" *ngFor="let item of (objTracknTrace.consigneeMileStones.mileStones ?
+                    objTracknTrace.consigneeMileStones.mileStones: []); index as i ">
+                        <table class="table">
+                          <tr class="">
+                            <td>
+                              <span style="margin-left:28px;">{{item.MileStoneName}}</span>
+                            </td>
+                            <td>
+                              {{item.MileStoneValue}}
+                            </td>
+                          </tr>
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="square-jelly-box" [fullScreen]="true">
+      <p style="color: white"> Loading... </p>
+    </ngx-spinner>
+
+  </div>

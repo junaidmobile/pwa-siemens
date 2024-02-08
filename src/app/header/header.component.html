@@ -1,0 +1,41 @@
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+  <img src="assets/img/logo-header.png" class="brand_logo" alt="Logo" style="height: 40px;width: 100px;">&nbsp;&nbsp;
+
+  <h6>{{title}}</h6>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown no-arrow">
+      <!-- <button  data-toggle="modal" data-target="#exampleModal" id="sidebarToggleTop"
+          class="btn btn-link">
+          <i class="fa fa-sign-out"></i>
+        </button> -->
+
+      <button (click)="exit()" class="btn btn-link">
+        <i class="fa fa-sign-out"></i>
+      </button>
+
+    </li>
+  </ul>
+</nav>
+
+<!-- <div [@routerTransition]  class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Warning <i class="fa fa-warning text-warning"></i></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to log out.
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary btn-sm" data-dismiss="modal">No</button>
+            <button class="btn btn-primary btn-sm" data-dismiss="modal"
+            style="margin-right: 10px;" (click)="exit()">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div> -->

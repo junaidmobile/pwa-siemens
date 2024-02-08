@@ -1,0 +1,96 @@
+<div id="content-wrapper" [@routerTransition] class="d-flex flex-column">
+
+  <div id="content">
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+      <button routerLink='/dashboard' class="btn btn-link">
+        <i class="fa fa-chevron-left"></i>
+      </button>
+      <h6>Check List</h6>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown no-arrow">
+          <button id="sidebarToggleTop" class="btn btn-link">
+            <i class="fa fa-sign-out"></i>
+          </button>
+        </li>
+
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12  ">
+          <div class="form-group">
+            <select class="form-control" id="checklist">
+              <option value="1">BoE Checklist</option>
+              <option value="1">SB Checklist</option>
+
+            </select>
+          </div>
+        </div>
+
+        <div class="col-12 cardMargin" *ngFor="let item of CheckListDetail; index as i;">
+          <div class=" card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+              <table class="table">
+                <tr>
+                  <th>
+                    Checklist Received
+                  </th>
+                  <th>
+                    Job No.
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                   {{item.JobRefNo}}
+                  </td>
+                  <td>
+                    {{item.JobRefNo}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <th>
+                    Origin - Destination
+                  </th>
+                  <th>
+                    HAWB No.
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="fa fa-plane"></i> {{item.Origin}}-{{item.Destination}}
+                  </td>
+                  <td>
+                    {{item.HAWBNo}} <i (click)="goChkDetail();" style="float: right;font-size: xx-large;color: #ec6702;"
+                      class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    BU
+                  </th>
+                  <th>
+                    Total Duty (INR)
+                  </th>
+                </tr>
+                <tr>
+                  <td >
+                   {{item.BusinessUnit}}
+                  </td>
+                  <td>
+                    {{item.DutyPayable}}
+                  </td>
+                </tr>
+
+              </table>
+            </div>
+          </div>
+        </div>
+        <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="square-jelly-box" [fullScreen]="true">
+          <p style="color: white"> Loading... </p>
+        </ngx-spinner>
+      </div>
+    </div>
+  </div>
+</div>
